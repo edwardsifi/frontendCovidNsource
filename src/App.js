@@ -102,8 +102,8 @@ function App() {
         resp = null;
       })
 
-    let user = resp ? resp.data : null;
-    // console.log(user);
+    let user = resp ? resp.data.infauthusr : null;
+    console.log(user);
 
     if (user) {
       setUserLog(user);
