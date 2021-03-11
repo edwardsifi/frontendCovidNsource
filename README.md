@@ -1,3 +1,45 @@
+﻿
+# Frontend del covid para Nicasource
+
+Esta apliacion esta realizada con los frameworks de javascript
+como: nodejs, axios, React js, react-router-dom.
+
+
+## Instalacion
+
+Esta aplicacion esta creada con npx-create-react-app
+por lo que los comandos por defecto pueden usarse
+
+```bash
+
+npm start: inicia un servidor de desarrollo en el localhost:3000
+npm run build: contruye la aplicacion para produccion para que los navegadores
+pudan entenderlo
+
+
+```
+
+## uso para desarrollo
+
+```node
+import foobar
+
+npm i -> instala los paquetes
+npm run dev.
+
+
+```
+
+## Desarrollador
+Eduardo Aristides Bogran Centeno
+
+
+
+## Lisencia
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
