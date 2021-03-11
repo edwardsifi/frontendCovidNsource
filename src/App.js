@@ -15,6 +15,7 @@ import Index from './components/index';
 import Login from './components/Pages/Login';
 import Signup from './components/Pages/Signup';
 import Dashboard from './components/admin/dashboard';
+import EditCountry from './components/edits/EditCountry';
 
 //context
 import Context from "./Context";
@@ -146,6 +147,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/singup" exact component={Signup} />
           <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/editcountry/:id" exact component={EditCountry} />
 
         </Switch>
       </Router>

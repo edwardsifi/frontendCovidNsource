@@ -18,6 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "author": "Eduardo Aristides Bogran Centeno",
   "eslintConfig": {
     "extends": [
       "react-app",

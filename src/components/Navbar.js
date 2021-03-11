@@ -34,15 +34,19 @@ const Navbar = (props) => {
                                 <a href="/" className="navbar-item" onClick={props.context.logout}>
                                     Logout: {props.context.user.username}
                                 </a>
+                                
                             )}
 
                             {!props.context.user ? (
                                    <li class="">
                                    <NavLink class="nav-link active" aria-current="page" to="/singup">Signup</NavLink>
-                               </li>
+                                    </li>
 
                             ) : (
                                <>
+                                <NavLink to="/dashboard" className="navbar-item" >
+                                    dashboard
+                                </NavLink>
                                </>
                             )}
 
