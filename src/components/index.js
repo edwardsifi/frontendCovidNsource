@@ -29,36 +29,46 @@ const index = () => {
             </div>
 
             {/* <!-- Container (The Band Section) --> */}
-            <div id="band" class="container text-center">
-                <h3>Coronavirus</h3>
-                <p><em>pandemia mundial!</em></p>
-                <p>Los síntomas más habituales son los siguientes:
-                Fiebre
-                Tos seca
-                Cansancio
-                Otros síntomas menos comunes son los siguientes:
-                Molestias y dolores
-                Dolor de garganta
-                Diarrea
-                Conjuntivitis
-                Dolor de cabeza
-                Pérdida del sentido del olfato o del gusto
+            <div  class="container ">
+
+                <div className="row">
+
+                    <div className="col text-center">
+                        <h3>Coronavirus</h3>
+                        <p><em>pandemia mundial!</em></p>
+                        <p>Los síntomas más habituales son los siguientes:
+                        Fiebre
+                        Tos seca
+                        Cansancio
+                        Otros síntomas menos comunes son los siguientes:
+                        Molestias y dolores
+                        Dolor de garganta
+                        Diarrea
+                        Conjuntivitis
+                        Dolor de cabeza
+                        Pérdida del sentido del olfato o del gusto
                 Erupciones cutáneas o pérdida del color en los dedos de las manos o de los pies</p>
-                <br></br>
-                <div class="row">
-                    <div class="col-sm-4">
+                        <br></br>
+                    </div>
+
+
+                </div>
+
+
+                <div class="row py-2 justify-content-center">
+                    <div class="col-sm-4 text-center">
                         <p class="text-center"><strong>Fiebre</strong></p><br></br>
                         <a href="#demo" data-toggle="collapse">
                             <img src="https://image.freepik.com/vector-gratis/hombre-enfermo-fiebre-midiendo-temperatura-corporal-termometro-sosteniendo-bolsa-hielo-cabeza_8183-285.jpg" class="img-circle person" alt="Random Name" width="255" height="255" />
                         </a>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 text-center">
                         <p class="text-center"><strong>Tos seca</strong></p><br></br>
                         <a href="#demo2" data-toggle="collapse">
                             <img src="http://tukol.com.mx/funciona/wp-content/uploads/2019/02/shutterstock_680051710-300x300.jpg" class="img-circle person" alt="Random Name" width="255" height="255" />
                         </a>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 text-center">
                         <p class="text-center"><strong>Cansancio</strong></p><br></br>
                         <a href="#demo3" data-toggle="collapse">
                             <img src="https://static2.abc.es/media/bienestar/2021/01/15/cansancio-2-kTu--510x349@abc.jpg" class="img-circle person" alt="Random Name" width="255" height="255" />
@@ -67,7 +77,7 @@ const index = () => {
                 </div>
             </div>
 
-            <Footer/>
+            <Footer />
         </>
     )
 }

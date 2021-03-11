@@ -55,11 +55,11 @@ const Dashboard = (props) => {
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getSync();
-    },[])
+    }, [])
 
-    const getSync = async () =>{
+    const getSync = async () => {
         let axiosConfig = {
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const Dashboard = (props) => {
         await axios.get(`https://api-covidnsource.herokuapp.com/api/Sync`, axiosConfig)
             .then((res) => {
                 console.log("RESPONSE RECEIVED: ", res);
-               
+
             })
             .catch((err) => {
                 // console.log("AXIOS ERROR: ", err);
@@ -179,7 +179,7 @@ const Dashboard = (props) => {
         <Redirect to='/' />
     ) : (
         <>
-            <div class="container-fluid" style={styles.paddingTop}>
+            <div class="container" style={styles.paddingTop}>
                 <h1>Estadisticas del covid</h1>
 
                 <div className="row">
@@ -216,47 +216,47 @@ const Dashboard = (props) => {
                 </div>
 
 
-                <div className="row">
 
-                    <table class="table caption-top">
-                        <caption>Dasos del covid del pais {datacountri ? datacountri.country : <></>}</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">cases</th>
-                                <th scope="col">day</th>
-                                <th scope="col">deaths </th>
-                                <th scope="col">population</th>
-                                <th scope="col">tests</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <p>casos criticos: {datacountri ? datacountri.cases.critical : <></>}</p>
-                                    <p>casos nuevos: {datacountri ? datacountri.cases.new : <></>}</p>
-                                    <p>casos por millon: {datacountri ? datacountri.cases.oneM_pop : <></>}</p>
-                                    <p>total recuperados: {datacountri ? datacountri.cases.recovered : <></>}</p>
-                                    <p>casos totales: {datacountri ? datacountri.cases.total : <></>}</p>
-                                </th>
-                                <td>
-                                    <p>ultima actualizacion: {datacountri ? datacountri.day : <></>}</p>
-                                </td>
-                                <td>
-                                    <p>nuevas muertes: {datacountri ? datacountri.deaths.new : <></>}</p>
-                                    <p>muertes totales: {datacountri ? datacountri.deaths.total : <></>}</p>
-                                </td>
-                                <td>
-                                    <p>poblacion: {datacountri ? datacountri.population : <></>}</p>
-                                </td>
-                                <td>
-                                    <p>pruebas por millon: {datacountri ? datacountri.tests.oneM_pop : <></>}</p>
-                                    <p>pruebas totales: {datacountri ? datacountri.tests.total : <></>}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
+                    
+                        <table class=" table caption-top">
+                            <caption>Dasos del covid del pais {datacountri ? datacountri.country : <></>}</caption>
+                            <thead className="">
+                                <tr>
+                                    <th scope="col">cases</th>
+                                    <th scope="col">day</th>
+                                    <th scope="col">deaths </th>
+                                    <th scope="col">population</th>
+                                    <th scope="col">tests</th>
+                                </tr>
+                            </thead>
+                            <tbody className="">
+                                <tr >
+                                    <th  scope="row">
+                                        <p>casos criticos: {datacountri ? datacountri.cases.critical : <></>}</p>
+                                        <p>casos nuevos: {datacountri ? datacountri.cases.new : <></>}</p>
+                                        <p>casos por millon: {datacountri ? datacountri.cases.oneM_pop : <></>}</p>
+                                        <p>total recuperados: {datacountri ? datacountri.cases.recovered : <></>}</p>
+                                        <p>casos totales: {datacountri ? datacountri.cases.total : <></>}</p>
+                                    </th>
+                                    <td >
+                                        <p>ultima actualizacion: {datacountri ? datacountri.day : <></>}</p>
+                                    </td>
+                                    <td>
+                                        <p>nuevas muertes: {datacountri ? datacountri.deaths.new : <></>}</p>
+                                        <p>muertes totales: {datacountri ? datacountri.deaths.total : <></>}</p>
+                                    </td>
+                                    <td>
+                                        <p>poblacion: {datacountri ? datacountri.population : <></>}</p>
+                                    </td>
+                                    <td>
+                                        <p>pruebas por millon: {datacountri ? datacountri.tests.oneM_pop : <></>}</p>
+                                        <p>pruebas totales: {datacountri ? datacountri.tests.total : <></>}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    
+               
 
 
             </div>
