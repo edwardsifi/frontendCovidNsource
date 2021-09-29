@@ -1,42 +1,17 @@
-//react
-import React,{useState} from 'react';
-
+import React, { useState } from "react";
 //modulos
-import { Redirect } from "react-router-dom";
+import { NavLink, Redirect } from 'react-router-dom';
+import Swal from 'sweetalert2';
 //context
 import withContext from "../../withContext";
 
-//styles
-
-const styles = {
-    margin:{
-        marginTop: '8rem'
-    },
-    formContainer:{
-        backgroundColor:'#fff',
-        padding: '30px',
-        borderRadius:'10px',
-        boxShadow: '0px 0px 10px 0px #000'
-    },
-    bg:{
-        backgroundImage: 'http no repeat',
-        width:'100%',
-        height:'100vh',
-        backgroundsize:'100%'
-    },
-    paddingTop:{
-        paddingTop: '10rem'
-    }
-
-}
-
-
 const Login = (props) => {
-
+    //extrae el usuario del contexto
+    const { user } = props.context;
+    //state
     const [useremail, setuserEmail] = useState('');
     const [userpassword, setuserPassword] = useState('');
-    
-
+    //functions
     const handleChangeEmail = (e) => {
         setuserEmail(e.target.value);
     }
@@ -51,46 +26,68 @@ const Login = (props) => {
         const password = userpassword;
         // console.log(email);
         if (!email || !password) {
-            alert('Fill all fields');
-
+           
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Fill all fields!',
+                // footer: '<a href="">Why do I have this issue?</a>'
+              })
         }
         let loggedIn = await props.context.login(email, password);
         // console.log(props.context);
         // console.log(loggedIn);
         if (!loggedIn) {
-            alert('Credenciales invalidas');
-
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid credentials!',
+                // footer: '<a href="">Why do I have this issue?</a>'
+              })
         }
 
     };
 
-    const { user } = props.context;//extrae el usuario del contexto
-
-    return (user)? (
-        <Redirect to='/dashboard'/>
-    ):(
+    return (user) ? (
+        <Redirect to='/dashboard' />
+    ) : (
         <>
 
-            <section style={styles.paddingTop} className="container-fluid bg">
-                <section className="row justify-content-center">
-                    <section className="col-12 col-sm-6 col-md-3">
-                        <div className="form-container">
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChangeEmail} value={useremail} />
+            <main class="l-main">
+
+
+                <section class="signup section">
+                    <div class="signup__container bd-container bd-grid">
+                        <h2 class="section-title-center signup__title">Log In</h2>
+                        <p class="signup__description">Stay informed with us about covid-19 cases</p>
+                        <div class="log-grid" action="">
+                            <div class="signup__direction">
+                                <input type="email" placeholder="Email" class="signup__input" onChange={handleChangeEmail} value={useremail}/>
+                                <a href="#" class="button"></a>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" onChange={handleChangepassword} value={userpassword} />
+                            <div class="signup__direction">
+                                <input type="password" placeholder="Password" class="signup__input" onChange={handleChangepassword} value={userpassword}/>
+                                <a href="#" class="button"></a>
                             </div>
-                            <button type="submit" class="btn btn-block btn-primary" onClick={login}>Login</button>
+                            <div class="buttons-log">
+                                <button href="" class="log_button" onClick={login}>Log In</button>
+                                <NavLink to="/" className="log_button">Home</NavLink>
+                            </div>
                         </div>
-                    </section>
+                        <div class="signup__img">
+                            <img src="https://escholarium.educarex.es/useruploads/ctx/a/4709137/r/s/2059309/coronavirus-5062160_1280.png" alt="" />
+                        </div>
+                    </div>
+
+
                 </section>
-            </section>
+
+            </main>
+
 
         </>
-    );
+    )
 }
 
 export default withContext(Login);

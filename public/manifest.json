@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "CovidStats",
+  "name": "App to obtain covid-19 statistics",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "bacterias.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "bacterias.svg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "bacterias.svg",
       "type": "image/png",
       "sizes": "512x512"
     }

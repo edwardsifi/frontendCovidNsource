@@ -1,38 +1,16 @@
-//react
-import React, { useState, useEffect } from 'react';
-//components
-import TableCountries from '../table/tableCountries';
-import Pagination from '../Pagination/Pagination';
-import Footer from '../footer';
+import React, { useState, useEffect } from "react";
+
 //modulos
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
 //context
 import withContext from "../../withContext";
 
-
-//styles
-const styles = {
-    margin: {
-        marginTop: '8rem'
-    },
-    formContainer: {
-        backgroundColor: '#fff',
-        padding: '30px',
-        borderRadius: '10px',
-        boxShadow: '0px 0px 10px 0px #000'
-    },
-    bg: {
-        backgroundImage: 'http no repeat',
-        width: '100%',
-        height: '100vh',
-        backgroundsize: '100%'
-    },
-    paddingTop: {
-        paddingTop: '10rem'
-    }
-
-}
+//components
+import Countries from './Countries';
+import Pagination from '../pagination/Pagination';
+import Footer from '../Footer';
+import Pagination2 from "../pagination/Pagination2";
 
 const continents = [
     { nombre: 'Asia' },
@@ -51,14 +29,32 @@ const Dashboard = (props) => {
     try {
         user = props.context.user;
         token = props.context ? props.context.user.token : null;
+        console.log(user);
     } catch (error) {
 
     }
+    //states
+    //guarda el continente seleccionado
+    const [continent, setContinent] = useState('');
+    //guarda los datos del pais seleccionado
+    const [datacountri, setDataCountry] = useState();
+    //guarda los datos iniciales de los paices
+    const [countries, setCountries] = useState([]);
+    const [country, setCountry] = useState('');
+
+    //para uso de la paginacion
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(10);
+
+    //pais filtrado
+    const [fcountries, setFCountries] = useState([]);
 
     useEffect(() => {
         getSync();
     }, [])
 
+    //functions
     const getSync = async () => {
         let axiosConfig = {
             headers: {
@@ -77,25 +73,6 @@ const Dashboard = (props) => {
             })
 
     }
-
-
-    //states
-    //guarda el continente seleccionado
-    const [continent, setContinent] = useState('');
-    //guarda los datos del pais seleccionado
-    const [datacountri, setDataCountry] = useState();
-    //guarda los datos iniciales de los paices
-    const [countries, setCountries] = useState([]);
-    const [country, setCountry] = useState('');
-
-    //para uso de la paginacion
-    const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(20);
-
-    //pais filtrado
-    const [fcountries, setFCountries] = useState([]);
-
 
     //forms functions
     const onSelectContinent = (e) => {
@@ -154,7 +131,6 @@ const Dashboard = (props) => {
 
     }
 
-
     //obtiene el acutal numero de paises
     let currentPosts;
     try {
@@ -164,106 +140,111 @@ const Dashboard = (props) => {
     } catch (error) {
 
     }
+
     console.log(currentPosts);
 
     //cambia la paginacion de la tabla
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
+        console.log(pageNumber);
     }
 
+    const loadMore = () =>{
+        setPostsPerPage(postsPerPage + 5);
+    }
 
     //counting tables
     let Ccountry = 0;
+
 
     return !(user) ? (
         <Redirect to='/' />
     ) : (
         <>
-            <div class="container" style={styles.paddingTop}>
-                <h1>Estadisticas del covid</h1>
+            {/* <!-- main --> */}
 
-                <div className="row">
-                    <div className="col-6 col-md-4">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="nombre del pais" aria-label="Recipient's username" aria-describedby="basic-addon2" value={country} onChange={onchangeCountry} />
+            <main class="l-main">
+
+
+                <section class="dashboard section">
+                    <div class="signup__container bd-container bd-grid">
+                        <h2 class="section-title-center signup__title">Covid 19 statistics</h2>
+                        <p class="signup__description">Stay informed with us about covid-19 cases</p>
+                        <div class="log-grid" action="">
+                            <div class="signup__direction">
+                                <input type="text" placeholder="Type country" class="signup__input" value={country} onChange={onchangeCountry} />
+                                {/* <a href="#" class="button"></a> */}
+                            </div>
+                            <div class="signup__direction">
+
+                                {/* <!-- Default dropend button --> */}
+                                <div class="btn-group dropend">
+                                    <select value={continent} onChange={onSelectContinent} class="form-select" aria-label="Default select example">
+                                        <option value='' selected>{''}</option>
+                                        {
+                                            continents.map(continent => (
+                                                <option>{continent.nombre}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <p>Select the continent</p>
+                                </div>
+
+                            </div>
+                            <Countries Ccountries={currentPosts} loading={loading} selectedC={(countri) => onClickCountry(countri)} />
+                            <Pagination2 currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={fcountries.length} paginate={paginate} loadmore={loadMore}/>
+                        </div>
+                        <div class="table_container">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Cases</th>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Deaths</th>
+                                            <th scope="col">Population</th>
+                                            <th scope="col">Tests</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td >
+                                                <p>casos criticos: {datacountri ? datacountri.cases.critical : <>NA</>}</p>
+                                                <p>casos nuevos: {datacountri ? datacountri.cases.new : <>NA</>}</p>
+                                                <p>casos por millon: {datacountri ? datacountri.cases.oneM_pop : <>NA</>}</p>
+                                                <p>total recuperados: {datacountri ? datacountri.cases.recovered : <>NA</>}</p>
+                                                <p>casos totales: {datacountri ? datacountri.cases.total : <>NA</>}</p>
+                                            </td>
+                                            <td>
+                                                <p>ultima actualizacion: {datacountri ? datacountri.day : <></>}</p>
+                                            </td>
+                                            <td>
+                                                <p>nuevas muertes: {datacountri ? datacountri.deaths.new : <></>}</p>
+                                                <p>muertes totales: {datacountri ? datacountri.deaths.total : <></>}</p>
+                                            </td>
+                                            <td>
+                                                <p>poblacion: {datacountri ? datacountri.population : <></>}</p>
+                                            </td>
+                                            <td>
+                                                <p>pruebas por millon: {datacountri ? datacountri.tests.oneM_pop : <></>}</p>
+                                                <p>pruebas totales: {datacountri ? datacountri.tests.total : <></>}</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="row ">
 
-                    <div className="col-6 col-md-4">
-                        <div>
-                            <label>seleccione el continente</label>
-                            <select value={continent} onChange={onSelectContinent} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option value='' selected>{''}</option>
-                                {
-                                    continents.map(continent => (
-                                        <option>{continent.nombre}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="row">
-                    <div className="col-6 col-md-4">
-                        <TableCountries Ccountries={currentPosts} loading={loading} selectedC={(countri) => onClickCountry(countri)} />
-                        <Pagination postsPerPage={postsPerPage} totalPosts={fcountries.length} paginate={paginate} />
-                    </div>
-                </div>
+                </section>
 
 
 
-                    
-                        <table class=" table caption-top">
-                            <caption>Dasos del covid del pais {datacountri ? datacountri.country : <></>}</caption>
-                            <thead className="">
-                                <tr>
-                                    <th scope="col">cases</th>
-                                    <th scope="col">day</th>
-                                    <th scope="col">deaths </th>
-                                    <th scope="col">population</th>
-                                    <th scope="col">tests</th>
-                                </tr>
-                            </thead>
-                            <tbody className="">
-                                <tr >
-                                    <th  scope="row">
-                                        <p>casos criticos: {datacountri ? datacountri.cases.critical : <></>}</p>
-                                        <p>casos nuevos: {datacountri ? datacountri.cases.new : <></>}</p>
-                                        <p>casos por millon: {datacountri ? datacountri.cases.oneM_pop : <></>}</p>
-                                        <p>total recuperados: {datacountri ? datacountri.cases.recovered : <></>}</p>
-                                        <p>casos totales: {datacountri ? datacountri.cases.total : <></>}</p>
-                                    </th>
-                                    <td >
-                                        <p>ultima actualizacion: {datacountri ? datacountri.day : <></>}</p>
-                                    </td>
-                                    <td>
-                                        <p>nuevas muertes: {datacountri ? datacountri.deaths.new : <></>}</p>
-                                        <p>muertes totales: {datacountri ? datacountri.deaths.total : <></>}</p>
-                                    </td>
-                                    <td>
-                                        <p>poblacion: {datacountri ? datacountri.population : <></>}</p>
-                                    </td>
-                                    <td>
-                                        <p>pruebas por millon: {datacountri ? datacountri.tests.oneM_pop : <></>}</p>
-                                        <p>pruebas totales: {datacountri ? datacountri.tests.total : <></>}</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    
-               
-
-
-            </div>
-
+            </main>
             <Footer />
         </>
-    );
+    )
 }
 
 export default withContext(Dashboard);
