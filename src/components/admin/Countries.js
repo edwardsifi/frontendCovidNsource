@@ -19,7 +19,7 @@ const Contries = ({ Ccountries, loading, selectedC }) => {
             <div class="signup__direction">
 
                 <ul class="">
-                    <li><span class="dropdown-item-text">Choose the Country</span></li>
+                    <li><h5 class="dropdown-item-text">Choose the Country</h5></li>
                     {
                         cantidad.map(countri => (
                             <li>

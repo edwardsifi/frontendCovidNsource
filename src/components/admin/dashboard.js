@@ -149,7 +149,7 @@ const Dashboard = (props) => {
         console.log(pageNumber);
     }
 
-    const loadMore = () =>{
+    const loadMore = () => {
         setPostsPerPage(postsPerPage + 5);
     }
 
@@ -192,46 +192,25 @@ const Dashboard = (props) => {
 
                             </div>
                             <Countries Ccountries={currentPosts} loading={loading} selectedC={(countri) => onClickCountry(countri)} />
-                            <Pagination2 currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={fcountries.length} paginate={paginate} loadmore={loadMore}/>
+                            <Pagination2 currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={fcountries.length} paginate={paginate} loadmore={loadMore} />
                         </div>
                         <div class="table_container">
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Cases</th>
-                                            <th scope="col">Day</th>
-                                            <th scope="col">Deaths</th>
-                                            <th scope="col">Population</th>
-                                            <th scope="col">Tests</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td >
-                                                <p>casos criticos: {datacountri ? datacountri.cases.critical : <>NA</>}</p>
-                                                <p>casos nuevos: {datacountri ? datacountri.cases.new : <>NA</>}</p>
-                                                <p>casos por millon: {datacountri ? datacountri.cases.oneM_pop : <>NA</>}</p>
-                                                <p>total recuperados: {datacountri ? datacountri.cases.recovered : <>NA</>}</p>
-                                                <p>casos totales: {datacountri ? datacountri.cases.total : <>NA</>}</p>
-                                            </td>
-                                            <td>
-                                                <p>ultima actualizacion: {datacountri ? datacountri.day : <></>}</p>
-                                            </td>
-                                            <td>
-                                                <p>nuevas muertes: {datacountri ? datacountri.deaths.new : <></>}</p>
-                                                <p>muertes totales: {datacountri ? datacountri.deaths.total : <></>}</p>
-                                            </td>
-                                            <td>
-                                                <p>poblacion: {datacountri ? datacountri.population : <></>}</p>
-                                            </td>
-                                            <td>
-                                                <p>pruebas por millon: {datacountri ? datacountri.tests.oneM_pop : <></>}</p>
-                                                <p>pruebas totales: {datacountri ? datacountri.tests.total : <></>}</p>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+                                <ul class="">
+                                    <li><h5 class="dropdown-item-text">Data country: {datacountri ? datacountri.country : <>NA</>}</h5></li>
+                                    <li><span class="dropdown-item-text">Day: {datacountri ? datacountri.day : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">Cases critics: {datacountri ? datacountri.cases.critical : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">New cases: {datacountri ? datacountri.cases.new : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">casos por millon: {datacountri ? datacountri.cases.oneM_pop : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">total recuperados: {datacountri ? datacountri.cases.recovered : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">casos totales: {datacountri ? datacountri.cases.total : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">nuevas muertes: {datacountri ? datacountri.deaths.new : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">muertes totales: {datacountri ? datacountri.deaths.total : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">poblacion: {datacountri ? datacountri.population : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">pruebas por millon: {datacountri ? datacountri.tests.oneM_pop : <>NA</>}</span></li>
+                                    <li><span class="dropdown-item-text">pruebas totales: {datacountri ? datacountri.tests.total : <>NA</>}</span></li>
+                                </ul>
                             </div>
                         </div>
                     </div>

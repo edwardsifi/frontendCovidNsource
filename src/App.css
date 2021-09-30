@@ -480,6 +480,20 @@ img {
     border-color: var(--first-color-darken);
 }
 
+.alert {
+    position: relative;
+    padding: 0 0;
+    margin-bottom: 0rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-danger {
+    color: #842029;
+    background-color: var(--white-color);
+    border-color: var(--white-color);
+}
+
 /* RESET SWEET ALERT 2 */
 .swal2-styled.swal2-confirm {
     
